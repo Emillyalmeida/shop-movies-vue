@@ -6,13 +6,20 @@
       w="100vw"
       h="100vh"
       flex-dir="column"
-      justify-content="center"
     >
-      <CHeading text-align="center" mb="4">
-        ⚡️ Hello chakra-ui/vue
-      </CHeading>
       <CFlex justify="center" direction="column" align="center">
-        <CBox mb="3">
+        <Header />
+        <CGrid
+          v-if="listMovies.length > 0"
+          w="100%"
+          template-columns="repeat(auto-fill, minmax(200px,220px))"
+          justify-content="center"
+          gap="10"
+          p="8"
+          mt="4"
+        >
+          <Card v-for="movie in listMovies" :key="movie.id" :movie="movie" />
+          <!-- <CBox mb="3">
           <CIconButton
             mr="3"
             :icon="colorMode === 'light' ? 'moon' : 'sun'"
@@ -21,68 +28,11 @@
             } mode`"
             @click="toggleColorMode"
           />
-          <CButton
-            left-icon="info"
-            variant-color="blue"
-            @click="showToast"
-          >
+          <CButton left-icon="info" variant-color="blue" @click="showToast">
             Show Toast
           </CButton>
-        </CBox>
-        <CAvatarGroup>
-          <CAvatar
-            name="Evan You"
-            alt="Evan You"
-            src="https://pbs.twimg.com/profile_images/1206997998900850688/cTXTQiHm_400x400.jpg"
-          >
-            <CAvatarBadge size="1.0em" bg="green.500" />
-          </CAvatar>
-          <CAvatar
-            name="Jonathan Bakebwa"
-            alt="Jonathan Bakebwa"
-            src="https://res.cloudinary.com/xtellar/image/upload/v1572857445/me_zqos4e.jpg"
-          >
-            <CAvatarBadge size="1.0em" bg="green.500" />
-          </CAvatar>
-          <CAvatar
-            name="Segun Adebayo"
-            alt="Segun Adebayo"
-            src="https://pbs.twimg.com/profile_images/1169353373012897802/skPUWd6e_400x400.jpg"
-          >
-            <CAvatarBadge size="1.0em" bg="green.500" />
-          </CAvatar>
-          <CAvatar src="pop">
-            <CAvatarBadge size="1.0em" border-color="papayawhip" bg="tomato" />
-          </CAvatar>
-        </CAvatarGroup>
-        <CButton
-          left-icon="close"
-          variant-color="red"
-          mt="3"
-          @click="showModal = true"
-        >
-          Delete Account
-        </CButton>
-        <CModal :is-open="showModal">
-          <CModalOverlay />
-          <CModalContent>
-            <CModalHeader>Are you sure?</CModalHeader>
-            <CModalBody>Deleting user cannot be undone</CModalBody>
-            <CModalFooter>
-              <CButton @click="showModal = false">
-                Cancel
-              </CButton>
-              <CButton
-                margin-left="3"
-                variant-color="red"
-                @click="showModal = false"
-              >
-                Delete User
-              </CButton>
-            </CModalFooter>
-            <CModalCloseButton @click="showModal = false" />
-          </CModalContent>
-        </CModal>
+        </CBox> -->
+        </CGrid>
       </CFlex>
     </CBox>
   </div>
@@ -91,44 +41,31 @@
 <script lang="js">
 import {
   CBox,
-  CButton,
-  CAvatarGroup,
-  CAvatar,
-  CAvatarBadge,
-  CModal,
-  CModalContent,
-  CModalOverlay,
-  CModalHeader,
-  CModalFooter,
-  CModalBody,
-  CModalCloseButton,
-  CIconButton,
+  // CButton,
+  // CIconButton,
   CFlex,
-  CHeading
-} from '@chakra-ui/vue'
+  CGrid
 
+} from '@chakra-ui/vue'
+import Header from '../components/Header/header.vue'
+import Card from '~/components/Card/card.vue'
 export default {
   name: 'IndexPage',
   components: {
     CBox,
-    CButton,
-    CAvatarGroup,
-    CAvatar,
-    CAvatarBadge,
-    CModal,
-    CModalContent,
-    CModalOverlay,
-    CModalHeader,
-    CModalFooter,
-    CModalBody,
-    CModalCloseButton,
-    CIconButton,
+    // CButton,
+    // CIconButton,
     CFlex,
-    CHeading
+    Header,
+    CGrid,
+    Card
   },
+
   inject: ['$chakraColorMode', '$toggleColorMode'],
   data () {
     return {
+      loading: true,
+      listMovies: [],
       showModal: false,
       mainStyles: {
         dark: {
@@ -153,6 +90,9 @@ export default {
       return this.$toggleColorMode
     }
   },
+  mounted () {
+    this.fetchSomething()
+  },
   methods: {
     showToast () {
       this.$toast({
@@ -161,6 +101,15 @@ export default {
         status: 'success',
         duration: 10000,
         isClosable: true
+      })
+    },
+    fetchSomething  () {
+      this.$axios.$get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.VUE_APP_KEY_API}&language=pt-BR&page=1`).then((res) => {
+        res.results.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
+        this.listMovies = res.results
+        console.log(res.results)
+      }).catch((err) => {
+        console.log(err)
       })
     }
   }
