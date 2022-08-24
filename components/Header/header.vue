@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Cart :isOpen="isOpen" :close="close" />
     <CFlex
       align="center"
       w="100vw"
@@ -18,16 +19,19 @@
           icon="heart"
           color="white"
           size="lg"
-          font-size="2rem"
+          font-size="1.8rem"
           mr="3"
+          :_hover="{borderWidth: '1px', borderColor: 'white' }"
         />
         <c-icon-button
           aria-label="Carrinho"
           variant="ghost"
           icon="cart-shopping"
           color="white"
-          font-size="2rem"
+          font-size="1.8rem"
           size="lg"
+          :_hover="{borderWidth: '1px', borderColor: 'white' }"
+          @click="isOpen= true"
         />
       </CFlex>
     </CFlex>
@@ -39,10 +43,10 @@
 import {
   CFlex,
   CHeading,
-
   CIconButton
 
 } from '@chakra-ui/vue'
+import Cart from '../Cart/Cart.vue'
 
 export default {
   name: 'HeaderComp',
@@ -50,7 +54,19 @@ export default {
     // CButton,
     CIconButton,
     CFlex,
-    CHeading
+    CHeading,
+    Cart
+  },
+  data () {
+    return {
+      isOpen: false
+    }
+  },
+  methods: {
+    close () {
+      this.isOpen = false
+    }
   }
 }
 </script>
+</c-icon-button>
