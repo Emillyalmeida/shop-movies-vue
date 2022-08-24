@@ -11,6 +11,10 @@ export const getters = {
       0
     )
     return total
+  },
+  getMovie: state => (movie) => {
+    const findMovie = state.Cart.find(item => item.id === movie.id)
+    return findMovie || {}
   }
 }
 
@@ -41,7 +45,11 @@ export const mutations = {
     if (movie.qtd >= 1) {
       state.Cart = [...state.Cart]
     } else {
-      this.removeMovie(state, movie)
+      const filtered = state.Cart.filter(item => item.id !== movie.id)
+      state.Cart = filtered
     }
+  },
+  esvaziarCart (state) {
+    state.Cart = []
   }
 }
