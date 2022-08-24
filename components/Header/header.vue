@@ -1,6 +1,7 @@
 <template>
   <div>
     <Cart :isOpen="isOpen" :close="close" />
+    <Favorites :isOpen="isOpenFav" :close="closeFav" />
     <CFlex
       align="center"
       w="100vw"
@@ -22,6 +23,7 @@
           font-size="1.8rem"
           mr="3"
           :_hover="{borderWidth: '1px', borderColor: 'white' }"
+          @click="isOpenFav= true"
         />
         <c-icon-button
           aria-label="Carrinho"
@@ -47,26 +49,30 @@ import {
 
 } from '@chakra-ui/vue'
 import Cart from '../Cart/Cart.vue'
+import Favorites from '../Favorites/Favorites.vue'
 
 export default {
   name: 'HeaderComp',
   components: {
-    // CButton,
     CIconButton,
     CFlex,
     CHeading,
-    Cart
+    Cart,
+    Favorites
   },
   data () {
     return {
-      isOpen: false
+      isOpen: false,
+      isOpenFav: false
     }
   },
   methods: {
     close () {
       this.isOpen = false
+    },
+    closeFav () {
+      this.isOpenFav = false
     }
   }
 }
 </script>
-</c-icon-button>
