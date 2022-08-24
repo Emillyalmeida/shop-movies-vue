@@ -25,12 +25,13 @@
         aria-label="Favoritos"
         variant="ghost"
         icon="heart"
-        color="white"
+        :color="$store.getters['favorites/isFavorites'](movie) ? 'red.500' : 'white'"
         font-size="1.5rem"
         top="5px"
         right="5px"
         position="absolute"
         :_hover="{color: 'red.600' }"
+        @click="$store.getters['favorites/isFavorites'](movie) ? $store.commit('favorites/removeFavorites', movie): $store.commit('favorites/addFavorites', movie)"
       />
       <CStack mb="0">
         <CText font-weight="bold" font-size="1.1rem" text-align="center">
@@ -38,7 +39,9 @@
         </CText>
         <CFlex flex-dir="row" align-items="center" justify-content="center" gap="2">
           <c-icon name="star" size="1rem" />
-          <c-heading size="sm" pl='2'>{{ movie.vote_average }} </c-heading>
+          <c-heading size="sm" pl="2">
+            {{ movie.vote_average }}
+          </c-heading>
         </CFlex>
         <CText text-align="center">
           R$ 19,90
@@ -53,7 +56,8 @@
 
 <script>
 // eslint-disable-next-line quotes
-import { CBox, CImage, CStack, CButton, CHeading, CIconButton } from "@chakra-ui/vue"
+import { CBox, CImage, CStack, CButton, CHeading, CIconButton, CText } from "@chakra-ui/vue"
+
 export default {
   name: 'CardItem',
   components: {
@@ -62,7 +66,8 @@ export default {
     CStack,
     CButton,
     CHeading,
-    CIconButton
+    CIconButton,
+    CText
   },
   props: { movie: Object }
 }
