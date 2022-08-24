@@ -43,7 +43,7 @@
         <CText text-align="center">
           R$ 19,90
         </CText>
-        <CButton left-icon="cart-shopping" bg="indigo.400" color="white" :_hover="{bg: 'indigo.600' }">
+        <CButton left-icon="cart-shopping" bg="indigo.400" color="white" :_hover="{bg: 'indigo.600' }" @click="$store.commit('addMovie', {movie})">
           Adicionar
         </CButton>
       </CStack>
