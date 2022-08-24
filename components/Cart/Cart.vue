@@ -3,31 +3,46 @@
     <c-drawer :isOpen="isOpen" placement="right" :on-close="close">
       <c-drawer-overlay />
       <c-drawer-content :mt="['11vh', '11vh', '12vh']" h="90vh">
-        <c-drawer-close-button :top="['11vh', '11vh', '12vh']" mt="10px" />
-        <c-drawer-header>Meu Carrinho</c-drawer-header>
+        <c-drawer-close-button :top="['11vh', '11vh', '12vh']" mt="12px" ml="15px" right="auto" />
+        <c-drawer-header ml="40px" display="flex" justify-content="space-between" align-items="center">
+          <CHeading size="md">
+            Meu Carrinho
+          </CHeading>
+          <CButton variant="link" color="indigo.500" @click="$store.commit('esvaziarCart')">
+            Esvaziar
+          </CButton>
+        </c-drawer-header>
 
-        <c-drawer-body>
+        <c-drawer-body overflow-y="scroll" px="2">
           <template v-if="getCart.length > 0">
             <ItemCart v-for="movie in getCart" :key="movie.id" :movie="movie" />
           </template>
           <template v-else>
-            <CText>
-              Carrinho Vazio
-            </CText>
+            <CFlex flex-dir="column" align-items="center" p="6">
+              <CIcon name="cart-plus" font-size="4rem" />
+              <CText pt="3" font-size="1.5rem" font-weight="bold">
+                Carrinho Vazio
+              </CText>
+            </CFlex>
           </template>
         </c-drawer-body>
 
         <c-drawer-footer flex-dir="column" gap="3">
           <CFlex justify-content="space-between" padding-x="1" py="4">
-            <CText font-size="2rem">Total:</CText>
-            <CText font-weight="bold" font-size="2rem"> R$ {{ sumTotal.toFixed(2) }}</CText>
+            <CText font-size="1.75rem">
+              Total:
+            </CText>
+            <CText font-weight="bold" font-size="1.75rem">
+              R$ {{ sumTotal.toFixed(2) }}
+            </CText>
           </CFlex>
           <CButton
             bg="indigo.400"
             color="white"
             :_hover="{bg: 'indigo.600' }"
             h="50px"
-            font-size="1.5rem" >
+            font-size="1.25rem"
+          >
             Finalizar compra
           </CButton>
         </c-drawer-footer>
@@ -46,7 +61,9 @@ import {
   CDrawerContent,
   CDrawerCloseButton,
   CButton,
-  CFlex
+  CFlex,
+  CHeading,
+  CIcon
 
 } from '@chakra-ui/vue'
 import { mapGetters } from 'vuex'
@@ -63,7 +80,9 @@ export default {
     CDrawerContent,
     CDrawerCloseButton,
     CButton,
-    CFlex
+    CFlex,
+    CHeading,
+    CIcon
   },
   components: { ItemCart },
   props: { isOpen: Boolean, close: Function },
