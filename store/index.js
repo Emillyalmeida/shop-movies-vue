@@ -1,5 +1,5 @@
 export const state = () => ({
-  Cart: []
+  Cart: JSON.parse(localStorage.getItem('@MovieShop/cart')) || []
 })
 export const getters = {
   getCart (state) {
@@ -29,15 +29,18 @@ export const mutations = {
       movie.qtd = 1
       state.Cart = [...state.Cart, movie]
     }
+    localStorage.setItem('@MovieShop/cart', JSON.stringify(state.Cart))
   },
   removeMovie (state, movie) {
     const filtered = state.Cart.filter(item => item.id !== movie.id)
     state.Cart = filtered
+    localStorage.setItem('@MovieShop/cart', JSON.stringify(state.Cart))
   },
 
   addQtd (state, movie) {
     movie.qtd++
     state.Cart = [...state.Cart]
+    localStorage.setItem('@MovieShop/cart', JSON.stringify(state.Cart))
   },
 
   removeQtd (state, movie) {
@@ -48,8 +51,10 @@ export const mutations = {
       const filtered = state.Cart.filter(item => item.id !== movie.id)
       state.Cart = filtered
     }
+    localStorage.setItem('@MovieShop/cart', JSON.stringify(state.Cart))
   },
   esvaziarCart (state) {
     state.Cart = []
+    localStorage.setItem('@MovieShop/cart', JSON.stringify(state.Cart))
   }
 }
