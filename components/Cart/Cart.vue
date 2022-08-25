@@ -37,11 +37,13 @@
             </CText>
           </CFlex>
           <CButton
+            v-if="getCart.length > 0"
             bg="indigo.400"
             color="white"
             :_hover="{bg: 'indigo.600' }"
             h="50px"
             font-size="1.25rem"
+            @click="go"
           >
             Finalizar compra
           </CButton>
@@ -71,7 +73,7 @@ import ItemCart from '../ItemCart/ItemCart.vue'
 
 export default {
   name: 'ModalCart',
-  comments: {
+  components: {
     CDrawer,
     CDrawerBody,
     CDrawerFooter,
@@ -82,15 +84,20 @@ export default {
     CButton,
     CFlex,
     CHeading,
-    CIcon
+    CIcon,
+    ItemCart
   },
-  components: { ItemCart },
   props: { isOpen: Boolean, close: Function },
   computed: {
     ...mapGetters([
       'getCart',
       'sumTotal'
     ])
+  },
+  methods: {
+    go () {
+      return this.$router.push('/checkout')
+    }
   }
 }
 </script>
