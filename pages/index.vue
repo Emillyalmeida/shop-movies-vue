@@ -34,8 +34,8 @@
             Criado por Emilly Almeida
           </CText>
           <CFlex pt="3">
-            <c-link fontSize="xl" href="https://github.com/Emillyalmeida/">Git Hub</c-link>
-            <c-link ml="3" fontSize="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">Linkedin</c-link>
+            <c-link fontSize="xl" target="_blank" href="https://github.com/Emillyalmeida/">Git Hub</c-link>
+            <c-link ml="3" target="_blank" fontSize="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">Linkedin</c-link>
           </CFlex>
         </CFlex>
       </CFlex>
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     fetchSomething  () {
-      this.$axios.$get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.VUE_APP_KEY_API}&language=pt-BR&page=1`).then((res) => {
+      this.$axios.$get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&page=1`).then((res) => {
         res.results.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
         this.listMovies = res.results
       }).catch((err) => {
