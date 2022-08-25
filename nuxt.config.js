@@ -86,8 +86,5 @@ export default {
   // eslint-disable-next-line semi
   router: {
     prefetchLinks: false
-  },
-  publicRuntimeConfig: {
-    segmentApiSecret: process.env.VUE_APP_KEY_API,
   }
 };
