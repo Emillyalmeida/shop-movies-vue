@@ -17,9 +17,27 @@
           gap="10"
           p="8"
           mt="4"
+          min-h="80vh"
         >
           <Card v-for="movie in listMovies" :key="movie.id" :movie="movie" />
         </CGrid>
+        <CFlex
+          justify="center"
+          direction="column"
+          align-items="center"
+          color="white"
+          bg="vue.400"
+          w="100vw"
+          p="4"
+        >
+          <CText fontSize="2xl">
+            Criado por Emilly Almeida
+          </CText>
+          <CFlex pt="3">
+            <c-link fontSize="xl" href="https://github.com/Emillyalmeida/">Git Hub</c-link>
+            <c-link ml="3" fontSize="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">Linkedin</c-link>
+          </CFlex>
+        </CFlex>
       </CFlex>
     </CBox>
   </div>
@@ -29,7 +47,9 @@
 import {
   CBox,
   CFlex,
-  CGrid
+  CGrid,
+  CText,
+  CLink
 
 } from '@chakra-ui/vue'
 import Header from '../components/Header/header.vue'
@@ -41,7 +61,9 @@ export default {
     CFlex,
     Header,
     CGrid,
-    Card
+    Card,
+    CText,
+    CLink
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
@@ -73,7 +95,7 @@ export default {
       return this.$toggleColorMode
     }
   },
-  mounted () {
+  created () {
     this.fetchSomething()
   },
   methods: {
