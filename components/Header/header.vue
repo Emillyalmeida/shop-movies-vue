@@ -19,8 +19,16 @@
       </NuxtLink>
       <CFlex justify-content="space-between" align-items="center">
         <c-input-group>
-          <c-input :w="['170px','300px']" placeholder="Pesquisa" border-width="2px" bg="white" />
-          <c-input-right-element><c-icon name="arrow-forward" color="gray.800" /></c-input-right-element>
+          <c-input
+            v-model="pesq"
+            :w="['170px','300px']"
+            placeholder="Pesquisa"
+            border-width="2px"
+            bg="white"
+            color="black"
+            name="search"
+          />
+          <c-input-right-element><CIconButton icon="magnifying-glass" variant="ghost" aria-label="Carrinhos" color="gray.700" @click="search" /></c-input-right-element>
         </c-input-group>
         <CFlex padding-x="6" gap="10px" pos="relative">
           <CIconButton
@@ -86,8 +94,7 @@ import {
   CBox,
   CInput,
   CInputGroup,
-  CInputRightElement,
-  CIcon
+  CInputRightElement
 
 } from '@chakra-ui/vue'
 import { mapGetters } from 'vuex'
@@ -104,14 +111,14 @@ export default {
     CBox,
     CInput,
     CInputGroup,
-    CInputRightElement,
-    CIcon
+    CInputRightElement
   },
   props: { colorMode: String, toggle: Function },
   data () {
     return {
       isOpen: false,
-      isOpenFav: false
+      isOpenFav: false,
+      pesq: ''
     }
   },
   computed: {
@@ -129,6 +136,9 @@ export default {
     },
     go () {
       return this.$router.push('/')
+    },
+    search () {
+      return this.$router.push({ path: '/search', query: { q: this.pesq } })
     }
 
   }
