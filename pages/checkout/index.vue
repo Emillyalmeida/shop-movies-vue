@@ -5,10 +5,10 @@
       v-bind="mainStyles[colorMode]"
       d="flex"
       w="100%"
-      h="100vh"
+      h="100%"
       flex-dir="column"
     >
-      <Header />
+      <Header :colorMode="colorMode" :toggle="toggleColorMode" />
       <CFlex
         :flex-dir="['column','column','row']"
         justify-content="space-around"
