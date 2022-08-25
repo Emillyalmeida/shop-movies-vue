@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ModalSuccess :isOpen="isOpen" :close="close" :user="name" />
     <CBox
       v-bind="mainStyles[colorMode]"
       d="flex"
@@ -87,6 +88,7 @@ import {
 import { mapGetters } from 'vuex'
 import Header from '../../components/Header/header.vue'
 import ItemCart from '~/components/ItemCart/ItemCart.vue'
+import ModalSuccess from '~/components/ModalSuccess/ModalSuccess.vue'
 export default {
   name: 'PageCheckout',
   components: {
@@ -98,7 +100,8 @@ export default {
     CIcon,
     CButton,
     CText,
-    ItemCart
+    ItemCart,
+    ModalSuccess
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],
   data () {
@@ -115,6 +118,7 @@ export default {
       phone: null,
       address: null,
       estado: null,
+      isOpen: false,
       mainStyles: {
         dark: {
           bg: 'gray.700',
@@ -153,7 +157,11 @@ export default {
       } else if (!this.validEmail(this.email)) {
         this.showToast('Email Invalido')
       } else {
-        alert('success')
+        // eslint-disable-next-line quotes, no-useless-escape
+        this.Cpf = this.Cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3\-\$4")
+        this.cep = this.cep.replace(/^(\d{5})(\d)/, '$1-$2')
+        this.phone = this.phone.replace(/^(\d\d)(\d{5})(\d{4}).*/, '($1) $2-$3')
+        this.isOpen = true
       }
       e.preventDefault()
     },
@@ -182,6 +190,9 @@ export default {
         duration: 5000,
         position: 'top'
       })
+    },
+    close () {
+      this.isOpen = false
     }
   }
 }
