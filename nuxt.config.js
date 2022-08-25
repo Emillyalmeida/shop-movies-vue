@@ -5,6 +5,10 @@ import {
   faHeart,
   faCartShopping,
   faTrashCan,
+  faStar,
+  faCartPlus,
+  faMagnifyingGlass,
+  faHeartCrack
 } from "@fortawesome/free-solid-svg-icons";
 
 export default {
@@ -53,6 +57,10 @@ export default {
         faHeart,
         faCartShopping,
         faTrashCan,
+        faStar,
+        faCartPlus,
+        faMagnifyingGlass,
+        faHeartCrack
       },
     },
   },
@@ -76,4 +84,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   // eslint-disable-next-line semi
+  router: {
+    prefetchLinks: false
+  }
 };
