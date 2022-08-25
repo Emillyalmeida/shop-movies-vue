@@ -8,7 +8,7 @@
           <CHeading size="md">
             Meu Carrinho
           </CHeading>
-          <CButton variant="link" color="indigo.500" @click="$store.commit('esvaziarCart')">
+          <CButton variant="link" color="indigo.400" @click="$store.commit('esvaziarCart')">
             Esvaziar
           </CButton>
         </c-drawer-header>

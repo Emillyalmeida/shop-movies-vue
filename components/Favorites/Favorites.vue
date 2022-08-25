@@ -8,7 +8,7 @@
           <CHeading size="md">
             Meus Favoritos
           </CHeading>
-          <CButton variant="link" color="indigo.500" @click="$store.commit('favorites/esvaziarFavorites')">
+          <CButton variant="link" color="indigo.400" @click="$store.commit('favorites/clearFavorites')">
             Limpar
           </CButton>
         </c-drawer-header>
@@ -19,7 +19,7 @@
           </template>
           <template v-else>
             <CFlex flex-dir="column" align-items="center" p="6">
-              <CIcon name="cart-plus" font-size="4rem" />
+              <CIcon name="heart-crack" font-size="4rem" />
               <CText pt="3" font-size="1.5rem" font-weight="bold">
                 Sem Favoritos
               </CText>
@@ -45,7 +45,6 @@ import {
   CIcon
 
 } from '@chakra-ui/vue'
-// import { mapGetters } from 'vuex'
 import ItemFavorites from '../ItemFavorites/ItemFavorites.vue'
 export default {
   name: 'ModalFavorites',
@@ -63,10 +62,5 @@ export default {
     ItemFavorites
   },
   props: { isOpen: Boolean, close: Function }
-  // computed: {
-  //   ...mapGetters([
-  //     'favorites/getFavorites'
-  //   ])
-  // }
 }
 </script>

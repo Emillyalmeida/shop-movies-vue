@@ -31,7 +31,7 @@
 <script>
 import { CImage, CStack, CHeading, CIconButton, CFlex, CText } from '@chakra-ui/vue'
 export default {
-  name: 'ModalCart',
+  name: 'ItemCart',
   components: {
     CImage,
     CStack,
