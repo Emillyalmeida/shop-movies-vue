@@ -36,39 +36,7 @@
             </c-flex>
           </c-stack>
         </c-box>
-        <c-box :w="['100%','100%','45%']" px="3" py="8">
-          <template v-if="getCart.length > 0">
-            <ItemCart v-for="movie in getCart" :key="movie.id" :movie="movie" />
-          </template>
-          <template v-else>
-            <CFlex flex-dir="column" align-items="center" p="6">
-              <CIcon name="cart-plus" font-size="4rem" />
-              <CText pt="3" font-size="1.5rem" font-weight="bold">
-                Carrinho Vazio
-              </CText>
-            </CFlex>
-          </template>
-          <CFlex justify-content="space-between" padding-x="1" py="4">
-            <CText font-size="1.75rem">
-              Total:
-            </CText>
-            <CText font-weight="bold" font-size="1.75rem">
-              R$ {{ sumTotal.toFixed(2) }}
-            </CText>
-          </CFlex>
-          <CButton
-            bg="indigo.400"
-            color="white"
-            :_hover="{bg: 'indigo.600' }"
-            h="50px"
-            w="100%"
-            font-size="1.25rem"
-            type="submit"
-            value="Submit"
-          >
-            Finalizar compra
-          </CButton>
-        </c-box>
+        <BoxDetails />
       </CFlex>
     </CBox>
   </div>
@@ -79,16 +47,13 @@ import {
   CBox,
   CFlex,
   CStack,
-  CHeading,
-  CIcon,
-  CButton,
-  CText
+  CHeading
 
 } from '@chakra-ui/vue'
-import { mapGetters } from 'vuex'
+
 import Header from '../../components/Header/header.vue'
-import ItemCart from '~/components/ItemCart/ItemCart.vue'
 import ModalSuccess from '~/components/ModalSuccess/ModalSuccess.vue'
+import BoxDetails from '~/components/BoxDetails/BoxDetails.vue'
 export default {
   name: 'PageCheckout',
   components: {
@@ -97,11 +62,8 @@ export default {
     Header,
     CStack,
     CHeading,
-    CIcon,
-    CButton,
-    CText,
-    ItemCart,
-    ModalSuccess
+    ModalSuccess,
+    BoxDetails
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],
   data () {
@@ -140,11 +102,7 @@ export default {
     },
     toggleColorMode () {
       return this.$toggleColorMode
-    },
-    ...mapGetters([
-      'getCart',
-      'sumTotal'
-    ])
+    }
   },
   methods: {
     checkForm (e) {
