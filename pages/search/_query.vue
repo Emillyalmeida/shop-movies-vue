@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     getSearch  () {
-      this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_KEY_API}&language=pt-BR&query=${this.query}&page=1`).then((res) => {
+      this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&query=${this.query}&page=1`).then((res) => {
         const notimg = res.results.filter(item => item.poster_path !== null)
         notimg.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
         this.listMovies = notimg
