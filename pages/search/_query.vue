@@ -8,7 +8,7 @@
       flex-dir="column"
     >
       <CFlex justify="center" direction="column">
-        <Header :colorMode="colorMode" :toggle="toggleColorMode" />
+        <Header :colorMode="colorMode" :toggle="toggleColorMode" isSearch />
         <CFlex p="6" flex-dir="column" justify="center">
           <CHeading py="3" pl="2" size="lg">Pesquisar</CHeading>
           <c-input-group :mr="['2','10','16']" ml="2">

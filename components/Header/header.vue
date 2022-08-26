@@ -18,7 +18,7 @@
         <c-heading as="h1" size="xl" pl="4">Movie Shop</c-heading>
       </NuxtLink>
       <CFlex justify-content="center" align-items="center">
-        <c-input-group>
+        <c-input-group v-if="!isSearch">
           <c-input
             v-model="pesq"
             :w="['170px','300px']"
@@ -113,7 +113,7 @@ export default {
     CInputGroup,
     CInputRightElement
   },
-  props: { colorMode: String, toggle: Function },
+  props: { colorMode: String, toggle: Function, isSearch: Boolean },
   data () {
     return {
       isOpen: false,
