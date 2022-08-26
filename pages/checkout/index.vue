@@ -12,7 +12,7 @@
       <CFlex
         :flex-dir="['column','column','row']"
         justify-content="space-around"
-        px="10"
+        :px="['4','10']"
         py="10"
         as="form"
         @submit="checkForm"

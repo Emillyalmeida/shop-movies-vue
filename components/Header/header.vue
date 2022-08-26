@@ -11,13 +11,13 @@
       padding-x="4"
       gap="3"
       align-items="center"
-      :justify-content="['center','space-between']"
-      :wrap="['wrap','no-wrap']"
+      :flex-dir="['column','row']"
+      :justify-content="['space-between']"
     >
       <NuxtLink to="/">
         <c-heading as="h1" size="xl" pl="4">Movie Shop</c-heading>
       </NuxtLink>
-      <CFlex justify-content="space-between" align-items="center">
+      <CFlex justify-content="center" align-items="center">
         <c-input-group>
           <c-input
             v-model="pesq"
@@ -30,7 +30,7 @@
           />
           <c-input-right-element><CIconButton icon="magnifying-glass" variant="ghost" aria-label="Carrinhos" color="gray.700" @click="search" /></c-input-right-element>
         </c-input-group>
-        <CFlex padding-x="6" gap="10px" pos="relative">
+        <CFlex :padding-x="['2','6']" gap="10px" pos="relative">
           <CIconButton
             variant="ghost"
             color="white"
@@ -72,7 +72,7 @@
             justify-content="center"
             align-items="center"
             pos="absolute"
-            right="20px"
+            :right="['7px','20px']"
             top="0px"
           >
             <c-heading size="md">

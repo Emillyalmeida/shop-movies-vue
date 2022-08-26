@@ -2,8 +2,8 @@
   <div>
     <c-drawer :isOpen="isOpen" placement="right" :on-close="close">
       <c-drawer-overlay />
-      <c-drawer-content :mt="['11vh', '11vh', '12vh']" h="90vh">
-        <c-drawer-close-button :top="['11vh', '11vh', '12vh']" mt="12px" ml="15px" right="auto" />
+      <c-drawer-content :mt="['14vh', '11vh', '12vh']" h="90vh">
+        <c-drawer-close-button :top="['14vh', '11vh', '12vh']" mt="12px" ml="15px" right="auto" />
         <c-drawer-header ml="40px" display="flex" justify-content="space-between" align-items="center">
           <CHeading size="md">
             Meu Carrinho
