@@ -6,7 +6,7 @@
     gap="10"
     p="8"
   >
-    <c-spinner v-for="numbers in 20" :key="numbers" w="200px" h="200px" color="vue.400" />
+    <c-spinner v-for="numbers in 20" :key="numbers" w="180px" h="180px" color="vue.400" />
   </CGrid>
 </template>
 

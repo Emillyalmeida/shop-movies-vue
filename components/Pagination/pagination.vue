@@ -1,5 +1,5 @@
 <template>
-  <CFlex justify="center" align-items="center" px="6" pt="6">
+  <CFlex justify="center" align-items="center" px="6" pt="10">
     <c-button
       v-if="page > 1"
       left-icon="chevron-left"
