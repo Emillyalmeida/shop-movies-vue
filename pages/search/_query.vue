@@ -9,22 +9,32 @@
     >
       <CFlex justify="center" direction="column">
         <Header :colorMode="colorMode" :toggle="toggleColorMode" />
-        <CFlex p="6" flex-dir="row" justify="center">
-          <CHeading>Resultados para : </CHeading>
-          <CHeading color="red.500" ml="2">{{ $route.query.q }}</CHeading>
+        <CFlex p="6" flex-dir="column" justify="center">
+          <CHeading py="3" pl="2" size="lg">Pesquisar</CHeading>
+          <c-input-group :mr="['2','10','16']" ml="2">
+            <CInput v-model="query" color="red.500" border-width="2px" placeholder="Pesquisar" />
+            <c-input-right-element><CIcon name="magnifying-glass" color="gray.700" /></c-input-right-element>
+          </c-input-group>
+          <CHeading mt="6" pl="2" size="lg" font-weight="500">Resultados para : "{{ query }}" </CHeading>
         </CFlex>
         <template v-if="loading">
-          <c-spinner size="xl" />
-        </template>
-        <template v-else-if="listMovies.length > 0">
           <CGrid
-            v-if="listMovies.length > 0"
             w="100%"
             template-columns="repeat(auto-fill, minmax(200px,220px))"
             justify-content="center"
             gap="10"
             p="8"
-            mt="4"
+          >
+            <c-spinner v-for="numbers in 10" :key="numbers" w="200px" h="200px" />
+          </CGrid>
+        </template>
+        <template v-else-if="listMovies.length > 0">
+          <CGrid
+            w="100%"
+            template-columns="repeat(auto-fill, minmax(200px,220px))"
+            justify-content="center"
+            gap="10"
+            p="8"
           >
             <Card v-for="movie in listMovies" :key="movie.id" :movie="movie" />
           </CGrid>
@@ -47,7 +57,9 @@ import {
   CGrid,
   CHeading,
   CIcon,
-  CSpinner
+  CSpinner,
+  CInput,
+  CInputRightElement
 
 } from '@chakra-ui/vue'
 import Header from '../../components/Header/header.vue'
@@ -62,7 +74,9 @@ export default {
     Card,
     CHeading,
     CIcon,
-    CSpinner
+    CSpinner,
+    CInput,
+    CInputRightElement
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
@@ -96,19 +110,17 @@ export default {
     }
   },
   watch: {
-    query (value, old) {
-      console.log(value, old)
-      if (value !== old) {
-        this.getSearch()
-      }
+    query (value) {
+      this.loading = true
+      value ? this.getSearch(value) : this.getSearch('a')
     }
   },
   created () {
-    this.getSearch()
+    this.getSearch(this.$route.query.q)
   },
   methods: {
-    getSearch  () {
-      this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&query=${this.query}&page=1`).then((res) => {
+    getSearch  (que) {
+      this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&query=${que}&page=1`).then((res) => {
         const notimg = res.results.filter(item => item.poster_path !== null)
         notimg.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
         this.listMovies = notimg
