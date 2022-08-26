@@ -9,17 +9,7 @@
     >
       <CFlex justify="center" direction="column" align-items="center">
         <Header :colorMode="colorMode" :toggle="toggleColorMode" />
-        <CFlex justify="center" align-items="center" px="6" pt="6">
-          <c-button v-if="page > 1" left-icon="chevron-left" color="white" bg="indigo.400" @click="decrement">
-            Anterior
-          </c-button>
-          <CText color="red.500" px="6" font-weight="700" font-size="2xl">
-            {{ page }}
-          </CText>
-          <c-button right-icon="chevron-right" color="white" bg="indigo.400" @click="increment">
-            Próxima
-          </c-button>
-        </CFlex>
+        <Pagination :increment="increment" :decrement="decrement" :page="page" />
         <Loading v-if="loading" />
         <CGrid
           v-else
@@ -33,6 +23,7 @@
         >
           <Card v-for="movie in listMovies" :key="movie.id" :movie="movie" />
         </CGrid>
+        <Pagination :increment="increment" :decrement="decrement" :page="page" />
         <CFlex
           justify="center"
           direction="column"
@@ -41,6 +32,7 @@
           bg="vue.400"
           w="100vw"
           p="4"
+          mt="4"
         >
           <CText font-size="2xl">
             Criado por Emilly Almeida
@@ -61,13 +53,13 @@ import {
   CFlex,
   CGrid,
   CText,
-  CLink,
-  CButton
+  CLink
 
 } from '@chakra-ui/vue'
 import Header from '../components/Header/header.vue'
 import Card from '~/components/Card/card.vue'
 import Loading from '~/components/loading/loading.vue'
+import Pagination from '~/components/Pagination/pagination.vue'
 export default {
   name: 'IndexPage',
   components: {
@@ -79,7 +71,7 @@ export default {
     CText,
     CLink,
     Loading,
-    CButton
+    Pagination
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
