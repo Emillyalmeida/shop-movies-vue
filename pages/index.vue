@@ -9,8 +9,9 @@
     >
       <CFlex justify="center" direction="column" align="center">
         <Header :colorMode="colorMode" :toggle="toggleColorMode" />
+        <Loading v-if="loading" />
         <CGrid
-          v-if="listMovies.length > 0"
+          v-else
           w="100%"
           template-columns="repeat(auto-fill, minmax(200px,220px))"
           justify-content="center"
@@ -54,6 +55,7 @@ import {
 } from '@chakra-ui/vue'
 import Header from '../components/Header/header.vue'
 import Card from '~/components/Card/card.vue'
+import Loading from '~/components/loading/loading.vue'
 export default {
   name: 'IndexPage',
   components: {
@@ -63,7 +65,8 @@ export default {
     CGrid,
     Card,
     CText,
-    CLink
+    CLink,
+    Loading
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
@@ -103,6 +106,7 @@ export default {
       this.$axios.$get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&page=1`).then((res) => {
         res.results.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
         this.listMovies = res.results
+        this.loading = false
       }).catch((err) => {
         console.log(err)
       })

@@ -18,15 +18,7 @@
           <CHeading mt="6" pl="2" size="lg" font-weight="500">Resultados para : "{{ query }}" </CHeading>
         </CFlex>
         <template v-if="loading">
-          <CGrid
-            w="100%"
-            template-columns="repeat(auto-fill, minmax(200px,220px))"
-            justify-content="center"
-            gap="10"
-            p="8"
-          >
-            <c-spinner v-for="numbers in 10" :key="numbers" w="200px" h="200px" />
-          </CGrid>
+          <Loading />
         </template>
         <template v-else-if="listMovies.length > 0">
           <CGrid
@@ -42,7 +34,7 @@
         <template v-else>
           <CFlex pt="8" flex-dir="column" align-items="center">
             <CIcon name="heart-crack" font-size="8rem" />
-            <CHeading mt="4">Sem resultados encontrados </CHeading>
+            <CHeading mt="4"> Sem resultados encontrados </CHeading>
           </CFlex>
         </template>
       </CFlex>
@@ -57,12 +49,12 @@ import {
   CGrid,
   CHeading,
   CIcon,
-  CSpinner,
   CInput,
   CInputRightElement
 
 } from '@chakra-ui/vue'
 import Header from '../../components/Header/header.vue'
+import Loading from '../../components/loading/loading.vue'
 import Card from '~/components/Card/card.vue'
 export default {
   name: 'SearchPage',
@@ -74,9 +66,9 @@ export default {
     Card,
     CHeading,
     CIcon,
-    CSpinner,
     CInput,
-    CInputRightElement
+    CInputRightElement,
+    Loading
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
@@ -125,7 +117,6 @@ export default {
         notimg.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
         this.listMovies = notimg
         this.loading = false
-        console.log(res.results)
       }).catch((_) => {
         console.log('erro load api, please reaload')
       })
