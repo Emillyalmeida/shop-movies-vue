@@ -34,7 +34,7 @@
         @click="$store.getters['favorites/isFavorites'](movie) ? $store.commit('favorites/removeFavorites', movie): $store.commit('favorites/addFavorites', movie)"
       />
       <CStack mb="0" color="black">
-        <CText font-weight="bold" font-size="1.1rem" text-align="center">
+        <CText font-weight="bold" :font-size="movie.title.length > 30 ? '1rem' : '1.1rem'" text-align="center">
           {{ movie.title }}
         </CText>
         <CFlex flex-dir="row" align-items="center" justify-content="center" gap="2">
