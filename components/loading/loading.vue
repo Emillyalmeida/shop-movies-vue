@@ -6,20 +6,33 @@
     gap="10"
     p="8"
   >
-    <c-spinner v-for="numbers in 20" :key="numbers" w="180px" h="180px" color="vue.400" />
+    <CStack
+      v-for="numbers in 20"
+      :key="numbers"
+      bg="white"
+      w="200px"
+      h="420px"
+      rounded="lg"
+      justify-content="center"
+      align-items="center"
+    >
+      <c-spinner w="180px" h="180px" color="vue.400" />
+    </CStack>
   </CGrid>
 </template>
 
 <script>
 import {
   CGrid,
-  CSpinner
+  CSpinner,
+  CStack
 } from '@chakra-ui/vue'
 export default {
   name: 'LoadingComp',
   components: {
     CGrid,
-    CSpinner
+    CSpinner,
+    CStack
   }
 }
 </script>
