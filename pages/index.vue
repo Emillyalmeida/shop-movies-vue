@@ -7,8 +7,19 @@
       h="100%"
       flex-dir="column"
     >
-      <CFlex justify="center" direction="column" align="center">
+      <CFlex justify="center" direction="column" align-items="center">
         <Header :colorMode="colorMode" :toggle="toggleColorMode" />
+        <CFlex justify="center" align-items="center" px="6" pt="6">
+          <c-button v-if="page > 1" left-icon="chevron-left" color="white" bg="indigo.400" @click="decrement">
+            Anterior
+          </c-button>
+          <CText color="red.500" px="6" font-weight="700" font-size="2xl">
+            {{ page }}
+          </CText>
+          <c-button right-icon="chevron-right" color="white" bg="indigo.400" @click="increment">
+            Próxima
+          </c-button>
+        </CFlex>
         <Loading v-if="loading" />
         <CGrid
           v-else
@@ -31,12 +42,12 @@
           w="100vw"
           p="4"
         >
-          <CText fontSize="2xl">
+          <CText font-size="2xl">
             Criado por Emilly Almeida
           </CText>
           <CFlex pt="3">
-            <c-link fontSize="xl" target="_blank" href="https://github.com/Emillyalmeida/">Git Hub</c-link>
-            <c-link ml="3" target="_blank" fontSize="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">Linkedin</c-link>
+            <c-link font-size="xl" target="_blank" href="https://github.com/Emillyalmeida/">Git Hub</c-link>
+            <c-link ml="3" target="_blank" font-size="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">Linkedin</c-link>
           </CFlex>
         </CFlex>
       </CFlex>
@@ -50,7 +61,8 @@ import {
   CFlex,
   CGrid,
   CText,
-  CLink
+  CLink,
+  CButton
 
 } from '@chakra-ui/vue'
 import Header from '../components/Header/header.vue'
@@ -66,7 +78,8 @@ export default {
     Card,
     CText,
     CLink,
-    Loading
+    Loading,
+    CButton
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
@@ -75,6 +88,7 @@ export default {
       loading: true,
       listMovies: [],
       showModal: false,
+      page: 1,
       mainStyles: {
         dark: {
           bg: 'gray.700',
@@ -98,18 +112,32 @@ export default {
       return this.$toggleColorMode
     }
   },
+  watch: {
+    page (value) {
+      this.loading = true
+      this.fetchSomething()
+    }
+  },
   created () {
     this.fetchSomething()
   },
   methods: {
     fetchSomething  () {
-      this.$axios.$get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&page=1`).then((res) => {
+      this.$axios.$get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NUXT_ENV_KEY_API}&language=pt-BR&page=${this.page}`).then((res) => {
         res.results.forEach(item => (item.poster_path = 'https://image.tmdb.org/t/p/w200' + item.poster_path))
         this.listMovies = res.results
         this.loading = false
       }).catch((err) => {
         console.log(err)
       })
+    },
+    increment () {
+      this.page++
+    },
+    decrement () {
+      if (this.page > 1) {
+        this.page--
+      }
     }
   }
 }
