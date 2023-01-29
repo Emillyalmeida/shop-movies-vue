@@ -7,7 +7,7 @@
       h="100%"
       flex-dir="column"
     >
-      <CFlex justify="center" direction="column" align-items="center">
+      <CFlex justify="center" direction="column" align-items="center" w="100%">
         <Header :color-mode="colorMode" :toggle="toggleColorMode" />
         <Pagination :increment="increment" :decrement="decrement" :page="page" />
         <Loading v-if="loading" />
@@ -30,7 +30,7 @@
           align-items="center"
           color="white"
           bg="vue.400"
-          w="100vw"
+          w="100%"
           p="4"
           mt="4"
         >
@@ -39,10 +39,10 @@
           </CText>
           <CFlex pt="3" gap="2">
             <c-link font-size="xl" target="_blank" href="https://github.com/Emillyalmeida/">
-              <CIcon name="github" font-size="3rem" :_hover="{fontSize: '3.3rem'}" />
+              <CIcon name="github" font-size="3rem" transition="0.3" :_hover="{fontSize: '3.3rem'}" />
             </c-link>
             <c-link ml="5" target="_blank" font-size="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">
-              <CIcon name="linkedin" font-size="3rem" :_hover="{fontSize: '3.3rem'}" />
+              <CIcon name="linkedin" font-size="3rem" transition="0.3" :_hover="{fontSize: '3.3rem'}" />
             </c-link>
           </CFlex>
         </CFlex>

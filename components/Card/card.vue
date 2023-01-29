@@ -13,6 +13,7 @@
       pb="{2}"
       rounded="lg"
       cursor="pointer"
+      transition="0.3"
       :_hover="{ transform: 'translateY(-10px)', borderColor: 'gray.100'}"
     >
       <CImage
@@ -30,6 +31,7 @@
         top="5px"
         right="5px"
         position="absolute"
+        transition="0.3"
         :_hover="{color: 'red.600' }"
         @click="$store.getters['favorites/isFavorites'](movie) ? $store.commit('favorites/removeFavorites', movie): $store.commit('favorites/addFavorites', movie)"
       />

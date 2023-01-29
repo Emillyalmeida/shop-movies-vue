@@ -43,6 +43,7 @@
             :_hover="{bg: 'indigo.600' }"
             h="50px"
             font-size="1.25rem"
+            mb="3"
             @click="go"
           >
             Finalizar compra
