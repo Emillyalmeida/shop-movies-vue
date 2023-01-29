@@ -92,6 +92,7 @@
             pos="absolute"
             :right="['7px','20px']"
             top="0px"
+            @click="isOpen= true"
           >
             <c-heading size="md">
               {{ getCart.length }}
