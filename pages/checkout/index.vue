@@ -1,6 +1,7 @@
 <template>
   <div>
     <ModalSuccess :isOpen="isOpen" :close="close" :user="name" />
+    <BtnBack :text="'Loja'" />
     <CBox
       v-bind="mainStyles[colorMode]"
       d="flex"
@@ -54,6 +55,8 @@ import {
 import Header from '../../components/Header/header.vue'
 import ModalSuccess from '~/components/ModalSuccess/ModalSuccess.vue'
 import BoxDetails from '~/components/BoxDetails/BoxDetails.vue'
+import BtnBack from '~/components/BtnBack/btnBack.vue'
+
 export default {
   name: 'PageCheckout',
   components: {
@@ -63,7 +66,8 @@ export default {
     CStack,
     CHeading,
     ModalSuccess,
-    BoxDetails
+    BoxDetails,
+    BtnBack
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],
   data () {

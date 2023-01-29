@@ -1,5 +1,6 @@
 <template>
   <div class="container" width="100%">
+    <BtnBack :text="'Home'" />
     <CBox
       v-bind="mainStyles[colorMode]"
       d="flex"
@@ -8,14 +9,18 @@
       flex-dir="column"
     >
       <CFlex justify="center" direction="column">
-        <Header :colorMode="colorMode" :toggle="toggleColorMode" isSearch />
+        <Header :color-mode="colorMode" :toggle="toggleColorMode" is-search />
         <CFlex p="6" flex-dir="column" justify="center">
-          <CHeading py="3" pl="2" size="lg">Pesquisar</CHeading>
+          <CHeading py="3" pl="2" size="lg">
+            Pesquisar
+          </CHeading>
           <c-input-group :mr="['2','10','16']" ml="2">
             <CInput v-model="query" color="red.500" border-width="2px" placeholder="Pesquisar" />
             <c-input-right-element><CIcon name="magnifying-glass" color="gray.700" /></c-input-right-element>
           </c-input-group>
-          <CHeading mt="6" pl="2" size="lg" font-weight="500">Resultados para : "{{ query }}" </CHeading>
+          <CHeading mt="6" pl="2" size="lg" font-weight="500">
+            Resultados para : "<b>{{ query }}</b>"
+          </CHeading>
         </CFlex>
         <template v-if="loading">
           <Loading />
@@ -34,7 +39,9 @@
         <template v-else>
           <CFlex pt="8" flex-dir="column" align-items="center">
             <CIcon name="heart-crack" font-size="8rem" />
-            <CHeading mt="4"> Sem resultados encontrados </CHeading>
+            <CHeading mt="4">
+              Sem resultados encontrados
+            </CHeading>
           </CFlex>
         </template>
       </CFlex>
@@ -56,6 +63,8 @@ import {
 import Header from '../../components/Header/header.vue'
 import Loading from '../../components/loading/loading.vue'
 import Card from '~/components/Card/card.vue'
+import BtnBack from '~/components/BtnBack/btnBack.vue'
+
 export default {
   name: 'SearchPage',
   components: {
@@ -68,7 +77,8 @@ export default {
     CIcon,
     CInput,
     CInputRightElement,
-    Loading
+    Loading,
+    BtnBack
   },
 
   inject: ['$chakraColorMode', '$toggleColorMode'],
