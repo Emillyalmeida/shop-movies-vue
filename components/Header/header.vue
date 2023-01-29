@@ -1,21 +1,26 @@
 <template>
-  <div width="100%">
-    <Cart :isOpen="isOpen" :close="close" />
-    <Favorites :isOpen="isOpenFav" :close="closeFav" />
+  <div :style="{'width': '100%'}">
+    <Cart :is-open="isOpen" :close="close" />
+    <Favorites :is-open="isOpenFav" :close="closeFav" />
     <CFlex
-      w="100vw"
+      w="calc(100vw - 15px)"
+      minW="100%"
       bg="vue.400"
       :h="['15vh', '11vh', '12vh']"
+      :minH="['110px','75px','70px']"
       color="white"
       padding-y="4"
       padding-x="4"
       gap="3"
+      pos="relative"
       align-items="center"
       :flex-dir="['column','row']"
       :justify-content="['space-between']"
     >
       <NuxtLink to="/">
-        <c-heading as="h1" size="xl" pl="4">Movie Shop</c-heading>
+        <c-heading as="h1" size="xl" pl="4">
+          Movie Shop
+        </c-heading>
       </NuxtLink>
       <CFlex justify-content="center" align-items="center">
         <c-input-group v-if="!isSearch">
@@ -27,8 +32,17 @@
             bg="white"
             color="black"
             name="search"
+            @keyup="search"
           />
-          <c-input-right-element><CIconButton icon="magnifying-glass" variant="ghost" aria-label="Carrinhos" color="gray.700" @click="search" /></c-input-right-element>
+          <c-input-right-element>
+            <CIconButton
+              icon="magnifying-glass"
+              variant="ghost"
+              aria-label="Carrinhos"
+              color="gray.700"
+              @click="search"
+            />
+          </c-input-right-element>
         </c-input-group>
         <CFlex :padding-x="['2','6']" gap="10px" pos="relative">
           <CIconButton
@@ -36,11 +50,13 @@
             color="white"
             size="lg"
             font-size="1.8rem"
+            transition="0.3"
             :icon="colorMode === 'light' ? 'moon' : 'sun'"
             :aria-label="`Switch to ${
               colorMode === 'light' ? 'dark' : 'light'
             } mode`"
             :_hover="{borderWidth: '1px', borderColor: 'white' }"
+            :_focus="{ outline: 'none'}"
             @click="toggle"
           />
           <c-icon-button
@@ -51,6 +67,7 @@
             size="lg"
             font-size="1.8rem"
             :_hover="{borderWidth: '1px', borderColor: 'white' }"
+            :_focus="{ outline: 'none'}"
             @click="isOpenFav= true"
           />
           <c-icon-button
@@ -61,6 +78,7 @@
             font-size="1.8rem"
             size="lg"
             :_hover="{borderWidth: '1px', borderColor: 'white' }"
+            :_focus="{ outline: 'none'}"
             @click="isOpen= true"
           />
           <CBox
@@ -126,6 +144,17 @@ export default {
       'getCart',
       'sumTotal'
     ])
+  },
+  mounted () {
+    if (!this.isSearch) {
+      const inputSearch = document.getElementsByName('search')[0]
+
+      inputSearch.addEventListener('keyup', (e) => {
+        if (e.code === 'Enter') {
+          this.search()
+        }
+      })
+    }
   },
   methods: {
     close () {
