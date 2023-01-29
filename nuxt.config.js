@@ -11,6 +11,11 @@ import {
   faHeartCrack
 } from "@fortawesome/free-solid-svg-icons";
 
+import {
+  faGithub,
+  faLinkedin
+} from "@fortawesome/free-brands-svg-icons"
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -60,7 +65,9 @@ export default {
         faStar,
         faCartPlus,
         faMagnifyingGlass,
-        faHeartCrack
+        faHeartCrack,
+        faGithub,
+        faLinkedin
       },
     },
   },

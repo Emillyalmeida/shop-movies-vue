@@ -8,7 +8,7 @@
       flex-dir="column"
     >
       <CFlex justify="center" direction="column" align-items="center">
-        <Header :colorMode="colorMode" :toggle="toggleColorMode" />
+        <Header :color-mode="colorMode" :toggle="toggleColorMode" />
         <Pagination :increment="increment" :decrement="decrement" :page="page" />
         <Loading v-if="loading" />
         <CGrid
@@ -37,9 +37,13 @@
           <CText font-size="2xl">
             Criado por Emilly Almeida
           </CText>
-          <CFlex pt="3">
-            <c-link font-size="xl" target="_blank" href="https://github.com/Emillyalmeida/">Git Hub</c-link>
-            <c-link ml="3" target="_blank" font-size="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">Linkedin</c-link>
+          <CFlex pt="3" gap="2">
+            <c-link font-size="xl" target="_blank" href="https://github.com/Emillyalmeida/">
+              <CIcon name="github" font-size="3rem" :_hover="{fontSize: '3.3rem'}" />
+            </c-link>
+            <c-link ml="5" target="_blank" font-size="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">
+              <CIcon name="linkedin" font-size="3rem" :_hover="{fontSize: '3.3rem'}" />
+            </c-link>
           </CFlex>
         </CFlex>
       </CFlex>
@@ -53,7 +57,8 @@ import {
   CFlex,
   CGrid,
   CText,
-  CLink
+  CLink,
+  CIcon
 
 } from '@chakra-ui/vue'
 import Header from '../components/Header/header.vue'
@@ -71,6 +76,7 @@ export default {
     CText,
     CLink,
     Loading,
+    CIcon,
     Pagination
   },
 
