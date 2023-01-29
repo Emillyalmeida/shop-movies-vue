@@ -37,6 +37,19 @@ export default {
     CFlex,
     CButton
   },
-  props: { increment: Function, decrement: Function, page: Number }
+  props: {
+    increment: {
+      type: Function,
+      required: true
+    },
+    decrement: {
+      type: Function,
+      required: true
+    },
+    page: {
+      type: Number,
+      default: 1
+    }
+  }
 }
 </script>

@@ -55,7 +55,17 @@ export default {
     CModalCloseButton,
     CText
   },
-  props: { isOpen: Boolean, close: Function, user: String },
+  props: {
+    isOpen: Boolean,
+    close: {
+      type: Function,
+      required: true
+    },
+    user: {
+      type: String,
+      default: null
+    }
+  },
   methods: {
     go () {
       return this.$router.push('/')

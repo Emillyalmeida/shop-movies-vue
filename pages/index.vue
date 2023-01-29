@@ -126,6 +126,7 @@ export default {
         this.listMovies = res.results
         this.loading = false
       }).catch((err) => {
+        // eslint-disable-next-line no-console
         console.log(err)
       })
     },

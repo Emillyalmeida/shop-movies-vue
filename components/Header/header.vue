@@ -4,10 +4,10 @@
     <Favorites :is-open="isOpenFav" :close="closeFav" />
     <CFlex
       w="calc(100vw - 15px)"
-      minW="100%"
+      min-w="100%"
       bg="vue.400"
       :h="['15vh', '11vh', '12vh']"
-      :minH="['110px','75px','70px']"
+      :min-h="['110px','75px','70px']"
       color="white"
       padding-y="4"
       padding-x="4"
@@ -131,7 +131,17 @@ export default {
     CInputGroup,
     CInputRightElement
   },
-  props: { colorMode: String, toggle: Function, isSearch: Boolean },
+  props: {
+    colorMode: {
+      type: String,
+      default: ''
+    },
+    toggle: {
+      type: Function,
+      default: () => {}
+    },
+    isSearch: Boolean
+  },
   data () {
     return {
       isOpen: false,

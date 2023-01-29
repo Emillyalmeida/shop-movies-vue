@@ -128,6 +128,7 @@ export default {
         this.listMovies = notimg
         this.loading = false
       }).catch((_) => {
+        // eslint-disable-next-line no-console
         console.log('erro load api, please reaload')
       })
     }

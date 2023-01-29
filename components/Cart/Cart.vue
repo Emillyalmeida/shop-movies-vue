@@ -1,6 +1,6 @@
 <template>
   <div>
-    <c-drawer :isOpen="isOpen" placement="right" :on-close="close">
+    <c-drawer :is-open="isOpen" placement="right" :on-close="close">
       <c-drawer-overlay />
       <c-drawer-content :mt="['14vh', '11vh', '12vh']" h="90vh">
         <c-drawer-close-button :top="['14vh', '11vh', '12vh']" mt="12px" ml="15px" right="auto" />
@@ -88,7 +88,13 @@ export default {
     CIcon,
     ItemCart
   },
-  props: { isOpen: Boolean, close: Function },
+  props: {
+    isOpen: Boolean,
+    close: {
+      type: Function,
+      default: () => {}
+    }
+  },
   computed: {
     ...mapGetters([
       'getCart',

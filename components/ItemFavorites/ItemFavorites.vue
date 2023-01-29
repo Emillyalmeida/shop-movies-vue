@@ -35,6 +35,11 @@ export default {
     CFlex,
     CText
   },
-  props: { movie: Object }
+  props: {
+    movie: {
+      type: Object,
+      default: () => {}
+    }
+  }
 }
 </script>

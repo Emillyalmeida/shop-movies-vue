@@ -1,7 +1,7 @@
 <template>
   <div>
     <CFlex w="100%" p="2" px="['0','2']" justify-content="space-between" align-items="center">
-      <CImage :src="movie.poster_path" :alt="movie.title" boxSize="100px" objectFit="contain" />
+      <CImage :src="movie.poster_path" :alt="movie.title" box-size="100px" object-fit="contain" />
       <c-stack align-items="center">
         <c-heading text-align="center" font-size="lg">
           {{ movie.title }}
@@ -40,6 +40,11 @@ export default {
     CFlex,
     CText
   },
-  props: { movie: Object }
+  props: {
+    movie: {
+      type: Object,
+      default: () => {}
+    }
+  }
 }
 </script>

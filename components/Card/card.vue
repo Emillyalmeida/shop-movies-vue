@@ -3,7 +3,7 @@
   <div>
     <CBox
       w="200px"
-      boxShadow="xl"
+      box-shadow="xl"
       bg="white"
       min-h="430px"
       display="flex"
@@ -71,6 +71,11 @@ export default {
     CIconButton,
     CText
   },
-  props: { movie: Object }
+  props: {
+    movie: {
+      type: Object,
+      default: () => {}
+    }
+  }
 }
 </script>

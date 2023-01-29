@@ -1,15 +1,16 @@
 <template>
   <div>
-    <ModalSuccess :isOpen="isOpen" :close="close" :user="name" />
+    <ModalSuccess :is-open="isOpen" :close="close" :user="name" />
     <BtnBack :text="'Loja'" />
     <CBox
       v-bind="mainStyles[colorMode]"
       d="flex"
       w="100%"
       h="100%"
+      min-h="100vh"
       flex-dir="column"
     >
-      <Header :colorMode="colorMode" :toggle="toggleColorMode" />
+      <Header :color-mode="colorMode" :toggle="toggleColorMode" />
       <CFlex
         :flex-dir="['column','column','row']"
         justify-content="space-around"
@@ -19,7 +20,9 @@
         @submit="checkForm"
       >
         <c-box :w="['100%','100%','45%']">
-          <c-heading font-weight="400"> Finalizar Compra</c-heading>
+          <c-heading font-weight="400">
+            Finalizar Compra
+          </c-heading>
           <c-stack spacing="5" pt="5">
             <c-input v-model="name" border-width="2px" is-required placeholder="Nome Completo" />
             <c-flex justify-content="space-between">
@@ -123,6 +126,7 @@ export default {
         this.Cpf = this.Cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3\-\$4")
         this.cep = this.cep.replace(/^(\d{5})(\d)/, '$1-$2')
         this.phone = this.phone.replace(/^(\d\d)(\d{5})(\d{4}).*/, '($1) $2-$3')
+        this.$store.commit('esvaziarCart')
         this.isOpen = true
       }
       e.preventDefault()
