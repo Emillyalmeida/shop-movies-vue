@@ -1,4 +1,6 @@
-# movies-shopping
+<h1 align="center">movies-shopping</h1>
+
+<img align="center" alt="gif-movie-shop" title="movie-shopping" src="./static/gif-shop-movie.gif" />
 
 ## Desafio
 
