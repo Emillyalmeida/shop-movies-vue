@@ -38,10 +38,21 @@
             Criado por Emilly Almeida
           </CText>
           <CFlex pt="3" gap="2">
-            <c-link font-size="xl" target="_blank" href="https://github.com/Emillyalmeida/">
+            <c-link
+              font-size="xl"
+              target="_blank"
+              href="https://github.com/Emillyalmeida/"
+              aria-label="github emilly almeida"
+            >
               <CIcon name="github" font-size="3rem" transition="0.3" :_hover="{fontSize: '3.3rem'}" />
             </c-link>
-            <c-link ml="5" target="_blank" font-size="xl" href="https://www.linkedin.com/in/emilly-almeida-front-end/">
+            <c-link
+              ml="5"
+              target="_blank"
+              font-size="xl"
+              href="https://www.linkedin.com/in/emilly-almeida-front-end/"
+              aria-label="github emilly almeida"
+            >
               <CIcon name="linkedin" font-size="3rem" transition="0.3" :_hover="{fontSize: '3.3rem'}" />
             </c-link>
           </CFlex>

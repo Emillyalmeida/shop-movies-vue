@@ -21,6 +21,7 @@
         :alt="movie.title"
         h="275px"
         rounded="lg"
+        w="200px"
       />
       <c-icon-button
         aria-label="Favoritos"
