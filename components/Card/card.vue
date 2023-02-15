@@ -22,6 +22,7 @@
         h="275px"
         rounded="lg"
         w="200px"
+        object-fit="cover"
       />
       <c-icon-button
         aria-label="Favoritos"
