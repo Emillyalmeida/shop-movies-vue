@@ -22,15 +22,22 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "movies-shopping",
+    title: "movie shopping",
     htmlAttrs: {
-      lang: "en",
+      lang: "pt-br",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Author Emilly de Almeida" },
-      { name: "format-detection", content: "telephone=no" },
+      { hid: 'description', name: 'description', content: 'Consiste de uma tela inical com uma lista de filmes, consumindo a Api da TMDB, onde pode-se navegar pelas as páginas e ver mais filmes.Nessa aplicação é possível ver os quadinhos disponíveis e adciona-los ao carrinho, além de uma lista de favoritos onde pode-se adcionar e remover os seus filmes preferidos' },
+      { hid: 'og:title', property: 'og:title', content: 'Movie Shopp' },
+      { hid: 'og:description', property: 'og:description', content: 'Consiste de uma tela inical com uma lista de filmes, consumindo a Api da TMDB, onde pode-se navegar pelas as páginas e ver mais filmes.Nessa aplicação é possível ver os quadinhos disponíveis e adciona-los ao carrinho, além de uma lista de favoritos onde pode-se adcionar e remover os seus filmes preferidos' },
+      { hid: 'og:image', property: 'og:image', content: '/app-image.png' },
+
+      // twitter card
+      { hid: "twitter:title", name: "twitter:title", content: 'Movie Shopp' },
+      { hid: 'twitter:description', name: 'twitter:description', content: 'Consiste de uma tela inical com uma lista de filmes, consumindo a Api da TMDB, onde pode-se navegar pelas as páginas e ver mais filmes.Nessa aplicação é possível ver os quadinhos disponíveis e adciona-los ao carrinho, além de uma lista de favoritos onde pode-se adcionar e remover os seus filmes preferidos' },
+      { hid: "twitter:image", name: "twitter:image", content: '/app-image.png' },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
