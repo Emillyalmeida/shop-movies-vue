@@ -1,5 +1,5 @@
 export const state = () => ({
-  Favorites: JSON.parse(localStorage.getItem('@MovieShop/Favorites')) || []
+  Favorites: process.client ? JSON.parse(localStorage.getItem('@MovieShop/Favorites')) : []
 })
 
 export const getters = {
@@ -18,15 +18,18 @@ export const mutations = {
     if (!isFav) {
       state.Favorites = [...state.Favorites, movie]
     }
+    if (!process.client) { return }
     localStorage.setItem('@MovieShop/Favorites', JSON.stringify(state.Favorites))
   },
   removeFavorites (state, movie) {
     const filtered = state.Favorites.filter(item => item.id !== movie.id)
     state.Favorites = filtered
+    if (!process.client) { return }
     localStorage.setItem('@MovieShop/Favorites', JSON.stringify(state.Favorites))
   },
   clearFavorites (state) {
     state.Favorites = []
+    if (!process.client) { return }
     localStorage.setItem('@MovieShop/Favorites', JSON.stringify(state.Favorites))
   }
 }
